@@ -1,0 +1,11 @@
+{"lessons": [
+  {"text": "When two of three experts converged on forced-seller capitulation (despair tone, faded attention), fading it long worked; the loser chased the SAME despair short and got flushed the other way. DO fade an exhausted-seller extreme; do NOT add to the flush direction once attention has faded.",
+   "polarity": "enabling", "regime": "capitulation", "tags": ["capitulation", "flow", "contrarian", "long"], "importance": 7,
+   "provenance": ["dec-2026-06-10-BTC", "dec-2026-06-10-SOL"]},
+  {"text": "The winning short faded terminal euphoria (influencer FOMO + surging social attention + recycled narrative) - the crowd had no marginal buyer left. DO take the euphoria-top short when all three experts read greed/euphoria on LATE chasers.",
+   "polarity": "enabling", "regime": "euphoric", "tags": ["euphoric", "influencer", "contrarian", "short"], "importance": 7,
+   "provenance": ["dec-2026-06-11-SOL"]},
+  {"text": "A high-conviction directional read resting on a single source got vetoed by the Auditor and never traded; the winners all cited >=2 sources. Treat a lone-source extreme as un-actionable until a second source confirms.",
+   "polarity": "restrictive", "regime": null, "tags": ["evidence", "sourcing", "process"], "importance": 5,
+   "provenance": ["dec-2026-06-11-DOGE"]}
+]}

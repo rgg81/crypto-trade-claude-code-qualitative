@@ -1,0 +1,13 @@
+state/
+memory/
+content/
+__pycache__/
+.venv/
+*.pyc
+
+# secrets
+.env
+.env.*
+*.key
+*.pem
+.claude/

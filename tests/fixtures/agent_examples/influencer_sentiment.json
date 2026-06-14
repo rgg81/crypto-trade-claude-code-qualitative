@@ -1,0 +1,14 @@
+[
+  {"agent": "influencer",
+   "coin": "DOGE",
+   "stance": "bearish",
+   "level": "negative",
+   "s": -0.5,
+   "confidence": 0.64,
+   "claims": [
+     {"text": "Social tone is euphoric/FOMO: a wall of 'can't lose / 100x incoming' posts on StockTwits and Nitter - a crowded, late-stage long worth fading", "item_ids": ["doge_st_44", "doge_nitter_09"], "coins": ["DOGE"]},
+     {"text": "Two credible non-spam sources corroborate the euphoria, not a single viral post; Telegram pump-channel froth discounted", "item_ids": ["doge_st_44", "doge_reddit_31"], "coins": ["DOGE"]}
+   ],
+   "rationale": "Crowd at a euphoric extreme across StockTwits, Nitter and Reddit (Telegram shill froth discounted); contrarian-bearish as a late, crowded long, held below 0.7 since there is no capitulation washout to confirm exhaustion yet.",
+   "as_of_ts": "2026-06-13T12:00:00+00:00"}
+]

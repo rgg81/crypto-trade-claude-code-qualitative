@@ -1,0 +1,14 @@
+[
+  {"agent": "flow",
+   "coin": "SOL",
+   "stance": "bullish",
+   "level": "positive",
+   "s": 0.5,
+   "confidence": 0.68,
+   "claims": [
+     {"text": "24h mention volume 31 vs 30-day baseline ~6 (about 5x) - a live attention spike", "item_ids": ["sol_news_77", "sol_reddit_12"], "coins": ["SOL"]},
+     {"text": "spike tone skews constructive: 6 of 8 newest items tagged positive/very_positive across rss + reddit", "item_ids": ["sol_news_77", "sol_reddit_12", "sol_st_05"], "coins": ["SOL"]}
+   ],
+   "rationale": "Attention surging well above SOL's own baseline and the inflow of items leans positive across two sources, so accelerating constructive flow; held below 0.7 because the spike is one cycle old.",
+   "as_of_ts": "2026-06-13T12:00:00+00:00"}
+]

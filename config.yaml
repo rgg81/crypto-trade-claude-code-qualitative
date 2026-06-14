@@ -1,0 +1,71 @@
+# Operation ORACLE — non-secret runtime config. Secrets come from env (.env), never here.
+account_size_usdt: 10000.0
+timeframe: "4h"
+symbol_count: 10
+deep_model: "opus"
+quick_model: "haiku"
+verdict_horizon_weeks: 8
+# live: false => PAPER. Real mainnet market data (public, keyless), simulated execution.
+# The universe is selected dynamically each cycle by the Watcher (scout_cli); `symbols` is only a
+# cold-start fallback if a scan ever fails. Going live additionally requires a 'graduated' verdict;
+# ccxt futures testnet/sandbox is deprecated by Binance, so paper uses real mainnet data.
+live: false
+exchange:
+  testnet: false
+  key_env: "BINANCE_KEY"
+  secret_env: "BINANCE_SECRET"
+data:
+  news_rss_sources:
+    - "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml"
+    - "https://cointelegraph.com/rss"
+  fred_key_env: "FRED_API_KEY"
+  fred_series: ["DTWEXBGS", "DGS10", "FEDFUNDS", "CPIAUCSL"]
+  archive_dir: "state/archive"
+
+# ---------------------------------------------------------------------------
+# Qualitative sentiment desk (Operation ORACLE crawler-loop + decision funnel).
+# core_watchlist is the static set of liquid majors that ALWAYS sit in the
+# working universe; the crawler adds attention-spiking coins on top each tick.
+# ---------------------------------------------------------------------------
+qualitative:
+  core_watchlist: ["BTC", "ETH", "SOL", "XRP", "DOGE", "BNB", "ADA", "AVAX", "LINK", "LTC"]
+  crawl_interval_min: 15
+  spike_ratio: 2.0
+  spike_min_mentions: 5
+
+# Per-source crawl wiring. `enabled` is the list of source-adapter names the
+# 15-minute crawler runs; the other lists are the per-source upstreams (RSS
+# feeds, reddit subs, Nitter/Telegram mirrors, YouTube channels) the adapters
+# read. Anything absent falls back to the adapter's keyless defaults.
+sources:
+  enabled: ["rss", "reddit", "nitter", "stocktwits", "telegram", "youtube", "forums"]
+  feeds:
+    - "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml"
+    - "https://cointelegraph.com/rss"
+    - "https://decrypt.co/feed"
+    - "https://www.cryptoslate.com/feed/"
+    - "https://bitcoinmagazine.com/feed"
+    - "https://cryptopotato.com/feed/"
+  subs: ["CryptoCurrency", "CryptoMarkets", "Bitcoin", "ethereum", "solana"]
+  mirrors: ["https://nitter.net", "https://nitter.poast.org"]
+  channels: ["whale_alert_io", "CryptoSignalsOrg"]
+
+# Per-source overrides keyed by adapter name. These are the upstreams/knobs the crawler hands an
+# individual adapter (via crawler._source_cfg), so a source can read its OWN config instead of the
+# shared sources.* block.
+#  * forums.feeds  — real FORUM RSS (Bitcointalk board feeds), so forums stops mirroring the shared
+#                    news `feeds` above. Forums reads forums_feeds / forums.feeds and defaults to
+#                    its Bitcointalk board feeds — never the news RSS list.
+#  * stocktwits    — noise gate: per_symbol caps messages/ticker; min_body_chars drops bare cashtag
+#                    spam (a body that, stripped of cashtags/emoji/whitespace, is shorter than this)
+#                    unless it carries an explicit Bullish/Bearish label.
+sources_config:
+  forums:
+    feeds:
+      # Bitcointalk "Bitcoin Discussion" board RSS (SMF .rss action).
+      - "https://bitcointalk.org/index.php?action=.xml;type=rss;board=1.0"
+      # Bitcointalk "Altcoin Discussion" board RSS.
+      - "https://bitcointalk.org/index.php?action=.xml;type=rss;board=67.0"
+  stocktwits:
+    per_symbol: 20
+    min_body_chars: 25

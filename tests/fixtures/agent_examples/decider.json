@@ -1,0 +1,32 @@
+{
+  "plans": [
+    {"symbol": "BTCUSDT", "rating": "long", "confidence": 0.66,
+     "thesis": "Bull's strongest point stands: the crowd has already capitulated (flow very_negative on FORCED-seller tone, items bd-9/bd-14), narrative fear is stale, influencer attention faded to apathy - exhausted sellers, the contrarian long. Bear's flat fails because two sources converge on despair, so dispersion is low and the extreme is clean, not conflicted.",
+     "falsifiable_prediction": "Flow mood reverts from capitulation toward neutral within 2 cycles; invalidated if forum/influencer despair tone DEEPENS (fresh forced-seller posts) instead of fading."},
+    {"symbol": "SOLUSDT", "rating": "short", "confidence": 0.7,
+     "thesis": "Euphoria-top short: all three experts read terminal greed (influencer FOMO items tw-21/tw-30, recycled narrative rd-12, flow greedy on late chasers). The crowd is the marginal buyer and there is none left. Bull's momentum read IS the crowdedness; Bear won on the merits.",
+     "falsifiable_prediction": "Influencer euphoria tone rolls over to neutral within 2 cycles; invalidated if fresh, broad-based bullish conviction (new sources, not the same KOLs) enters the narrative."},
+    {"symbol": "ETHUSDT", "rating": "flat", "confidence": 0.55,
+     "thesis": "Experts genuinely conflict - flow fearful, influencer mildly greedy, narrative neutral - so dispersion is high and no mood signal dominates. Neither a clean despair to fade long nor a clean euphoria to fade short. Earned stand-down, not a deferred trigger.",
+     "falsifiable_prediction": "The expert dispersion persists (no two of three converge) over the next cycle; invalidated if flow and influencer both shift to the same extreme."}
+  ],
+  "proposals": [
+    {"symbol": "BTCUSDT", "direction": "long", "entry": 61000.0, "stop": 59200.0,
+     "take_profits": [64600.0], "atr": 900.0, "confidence": 0.66, "horizon_hours": 8.0,
+     "rationale": "long the exhausted-seller capitulation; entry at price-card mark, stop ~2x ATR below to survive residual flush noise, TP1 at 2R (3600 gain vs 1800 risk). press pacing, confluent two-source extreme -> full risk_mult.",
+     "falsifiable_prediction": "Flow mood reverts toward neutral within 2 cycles; invalidated if despair tone deepens.",
+     "confirmation": false, "risk_mult": 1.0, "contributing_agents": ["flow", "narrative"]},
+    {"symbol": "SOLUSDT", "direction": "short", "entry": 150.0, "stop": 156.0,
+     "take_profits": [138.0], "atr": 3.0, "confidence": 0.7, "horizon_hours": 8.0,
+     "rationale": "short the terminal-euphoria crowd; entry at price-card mark, stop ~2x ATR above the exhausted-greed level, TP1 at 2R (12 gain vs 6 risk). counter-mood not yet rolled over -> confirmation true, risk_mult reduced.",
+     "falsifiable_prediction": "Influencer euphoria rolls over to neutral within 2 cycles; invalidated if fresh broad conviction enters.",
+     "confirmation": true, "risk_mult": 0.5, "contributing_agents": ["flow", "narrative", "influencer"]}
+  ],
+  "management": [
+    {"symbol": "DOGEUSDT", "action": "reduce", "reduce_fraction": 0.5, "new_stop": 0.118, "reason": "capitulation thesis half played out - bank half at the mood-reversion, trail the runner."}
+  ],
+  "triggers": [
+    {"symbol": "SOLUSDT", "direction": "short", "kind": "stop_entry", "level": 148.0, "risk_mult": 0.5, "reason": "euphoria not yet rolled over - arm the short on confirmation of attention fading."}
+  ],
+  "crowd_mood": {"mood": "capitulation", "dispersion": 0.3, "rationale": "Forced-seller despair dominates flow + forums across the desk; experts largely agree (low dispersion) -> a clean, fadeable extreme."}
+}

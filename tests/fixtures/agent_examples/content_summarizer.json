@@ -1,0 +1,8 @@
+[
+  {"item_id": "a1b2c3",
+   "summary": "A top-five exchange paused all BTC withdrawals citing a security review after anomalous hot-wallet outflows were flagged on-chain. No timeline for resumption was given; deposits are said to be unaffected.",
+   "item_sentiment": "very_negative"},
+  {"item_id": "d4e5f6",
+   "summary": "An ETH layer-2 announced a routine sequencer upgrade scheduled for next week. The team said no user action is required and bridges remain open.",
+   "item_sentiment": "neutral"}
+]

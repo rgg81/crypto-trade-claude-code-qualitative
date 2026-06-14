@@ -1,0 +1,14 @@
+[
+  {"agent": "narrative",
+   "coin": "ETH",
+   "stance": "bearish",
+   "level": "very_negative",
+   "s": -1.0,
+   "confidence": 0.72,
+   "claims": [
+     {"text": "Confirmed ~$40M exploit of a major ETH-based lending protocol, breaking this cycle (~3h old) - a binary downside shock", "item_ids": ["eth_news_91", "eth_yt_18"], "coins": ["ETH"]},
+     {"text": "Two outlets corroborate the drained-funds figure and on-chain trace; no second narrative competes for the conversation", "item_ids": ["eth_news_91", "eth_forum_22"], "coins": ["ETH"]}
+   ],
+   "rationale": "One dominant, fresh, adverse catalyst - a confirmed exploit corroborated across news, a YouTube post-mortem, and a forum thread; weighted heavily as bad news is a binary gap risk per the charter.",
+   "as_of_ts": "2026-06-13T12:00:00+00:00"}
+]
