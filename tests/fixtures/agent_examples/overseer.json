@@ -1,0 +1,43 @@
+{
+  "proposals": [
+    {
+      "issue": "The flow lane has hallucinated coin-mis-tagged citations on SOL for three consecutive cycles: it cites real item_ids that resolve in the store but tag a DIFFERENT coin than SOL, so the Auditor neutralises the read every time (decision-qa hallucination_rate rising 0.18 -> 0.41; agent_reliability flow.reliability decaying 0.72 -> 0.55).",
+      "evidence": [
+        {"cycle": 41, "agent": "flow", "item_id": "btc_news_12", "detail": "cited for SOL read but item tags only BTC (coin mis-tag)"},
+        {"cycle": 42, "agent": "flow", "item_id": "eth_rd_08", "detail": "cited for SOL read but item tags only ETH"},
+        {"cycle": 43, "agent": "flow", "item_id": "doge_tw_30", "detail": "cited for SOL read but item tags only DOGE"}
+      ],
+      "target_file": "agents/flow_sentiment.md",
+      "classification": "prompt",
+      "fix_summary": "Add an explicit COIN-MATCH rule + worked counter-example: every cited item_id must TAG the read's coin (the Auditor re-resolves item.coins); a multi-asset roundup item only supports the coins it actually tags. Cite fewer ids over wrong ones.",
+      "safe_to_autofix": true,
+      "test_plan": "Edit agents/flow_sentiment.md; run `uv run pytest tests/test_agent_examples.py -q` (flow example must still validate + s round-trip). Watch decision-qa flow hallucination_rate over the next 3 cycles; expect it to fall back below 0.2."
+    },
+    {
+      "issue": "The narrative and flow lanes are echoing each other rather than corroborating: per-coin Jaccard overlap of their cited item_id sets averaged 0.81 over cycles 40-43, so two of three lanes rest on the SAME items and the desk over-counts single-source evidence as multi-source confluence.",
+      "evidence": [
+        {"cycle": 40, "agent": "narrative", "item_id": "sol_news_77", "detail": "same item cited by flow for SOL (redundancy)"},
+        {"cycle": 42, "agent": "flow", "item_id": "sol_news_77", "detail": "lane_redundancy_by_coin[SOL]=0.83"},
+        {"cycle": 43, "agent": "narrative", "detail": "lane_redundancy_mean=0.81 across coins"}
+      ],
+      "target_file": "agents/narrative_sentiment.md",
+      "classification": "prompt",
+      "fix_summary": "Strengthen the lane-boundary rule in the narrative prompt: narrative owns the dominant CATALYST/story and must cite the items that establish the STORY, not re-cite the flow lane's volume items; remind that the same item_id across lanes is ONE source, not independent corroboration.",
+      "safe_to_autofix": true,
+      "test_plan": "Edit agents/narrative_sentiment.md; run `uv run pytest tests/test_agent_examples.py -q` (narrative example still validates). Monitor decision-qa lane_redundancy_mean over 3 cycles; expect it below 0.5."
+    },
+    {
+      "issue": "Recurring AUDITOR ADVISORY 'evidence_sufficiency' on the influencer lane: high-confidence (>=0.6) non-neutral reads repeatedly cite a single source. This is the Auditor WORKING — the fix is the prompt's calibration rule, NEVER the check. Surface as protected so the operator confirms the check stays intact.",
+      "evidence": [
+        {"cycle": 42, "agent": "influencer", "detail": "[evidence_sufficiency] influencer SOL conf=0.7 cites 1 source"},
+        {"cycle": 43, "agent": "influencer", "detail": "[evidence_sufficiency] influencer BTC conf=0.65 cites 1 source"}
+      ],
+      "target_file": "futures_fund/sentiment_audit.py",
+      "classification": "protected",
+      "fix_summary": "DO NOT weaken evidence_sufficiency. Surface to human: the recurring advisory is correct desk behaviour being caught; the durable fix is the influencer PROMPT's confidence-calibration rule (cap conf<0.6 on single-source reads), not the Auditor. Logged for operator review only.",
+      "safe_to_autofix": false,
+      "test_plan": "Human review. No code change to the Auditor. If the operator approves, the follow-up is a prompt-only edit to agents/influencer_sentiment.md with its own ImprovementProposal."
+    }
+  ],
+  "summary": "3 systematic findings over cycles 40-43: (1) flow lane coin-mis-tag hallucinations (prompt fix, auto-safe), (2) flow/narrative lane redundancy echoing the same items (prompt fix, auto-safe), (3) a recurring evidence_sufficiency advisory that is the Auditor working correctly — surfaced as protected, the Auditor is never weakened. Every finding is grounded in cited cycle/agent/item evidence."
+}
